@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<bpmn:definitions targetNamespace="http://www.omg.org/spec/BPMN/20100524/MODEL" exporter="jBPMN NB" exporterVersion="0.3" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL http://www.omg.org/spec/BPMN/2.0/20100501/BPMN20.xsd" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:java="http://jcp.org/en/jsr/detail?id=270" xmlns:jbpmn="http://jbpmn.java.net" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL">
+    <bpmn:itemDefinition structureRef="String" id="String"/>
+    <bpmn:itemDefinition structureRef="Character" itemKind="Physical" id="Character"/>
+    <bpmn:itemDefinition structureRef="org.jbpm.bpmn2.core.Signal" id="org.jbpm.bpmn2.core.Signal"/>
+    <bpmn:itemDefinition structureRef="java.util.Set" id="ItemDefinition_1"/>
+    <bpmn:signal name="event" structureRef="String" id="_1423806309188144"/>
+    <bpmn:signal name="Signal 1" id="Signal_1"/>
+    <bpmn:process isClosed="false" name="useCase2" id="useCase2">
+        <bpmn:property itemSubjectRef="String" id="signalA"/>
+        <bpmn:property itemSubjectRef="String" id="pid"/>
+        <bpmn:property itemSubjectRef="String" id="type"/>
+        <bpmn:property itemSubjectRef="String" id="sig1"/>
+        <bpmn:property itemSubjectRef="String" id="sig2"/>
+        <bpmn:property itemSubjectRef="String" id="sig3"/>
+        <bpmn:property itemSubjectRef="String" id="name"/>
+        <bpmn:startEvent isInterrupting="true" parallelMultiple="false" name="Start" id="_1423791706961">
+            <bpmn:extensionElements>
+                <jbpmn:ShapeDesign>{"outer":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(226,232,236)"},"border":{"color":"RGB(108,142,183)","width":1.0}},"inner":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(255,248,159)"},"border":{"color":"RGB(30,69,123)","width":1.0}}}</jbpmn:ShapeDesign>
+            </bpmn:extensionElements>
+            <bpmn:outgoing>_1426746954725</bpmn:outgoing>
+        </bpmn:startEvent>
+        <bpmn:callActivity calledElement="subFlow" isForCompensation="false" startQuantity="1" completionQuantity="1" name="taskProcess" id="_1423791722074" drools:waitForCompletion="true" drools:independent="false" xmlns:drools="http://www.jboss.org/drools">
+            <bpmn:extensionElements>
+                <jbpmn:ShapeDesign>{"outer":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(226,232,236)"},"border":{"color":"RGB(108,142,183)","width":6.0}},"inner":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(255,248,159)"},"border":{"color":"RGB(30,69,123)","width":1.0}}}</jbpmn:ShapeDesign>
+            </bpmn:extensionElements>
+            <bpmn:incoming>_1423809445989</bpmn:incoming>
+            <bpmn:outgoing>_1426816951479</bpmn:outgoing>
+            <bpmn:ioSpecification id="InputOutputSpecification_2">
+                <bpmn:dataInput name="input1" itemSubjectRef="String" id="DataInput_1"/>
+                <bpmn:dataInput name="input2" itemSubjectRef="String" id="DataInput_2"/>
+                <bpmn:dataInput name="input3" itemSubjectRef="String" id="DataInput_3"/>
+                <bpmn:dataOutput name="name" itemSubjectRef="String" id="DataOutput_1"/>
+                <bpmn:inputSet name="Input Set 7" id="_InputSet_7">
+                    <bpmn:dataInputRefs>DataInput_1</bpmn:dataInputRefs>
+                    <bpmn:dataInputRefs>DataInput_2</bpmn:dataInputRefs>
+                    <bpmn:dataInputRefs>DataInput_3</bpmn:dataInputRefs>
+                </bpmn:inputSet>
+                <bpmn:outputSet name="Output Set 1" id="OutputSet_1">
+                    <bpmn:dataOutputRefs>DataOutput_1</bpmn:dataOutputRefs>
+                </bpmn:outputSet>
+            </bpmn:ioSpecification>
+            <bpmn:dataInputAssociation id="DataInputAssociation_1">
+                <bpmn:sourceRef>pid</bpmn:sourceRef>
+                <bpmn:targetRef>DataInput_1</bpmn:targetRef>
+            </bpmn:dataInputAssociation>
+            <bpmn:dataInputAssociation id="DataInputAssociation_2">
+                <bpmn:sourceRef>type</bpmn:sourceRef>
+                <bpmn:targetRef>DataInput_2</bpmn:targetRef>
+            </bpmn:dataInputAssociation>
+            <bpmn:dataInputAssociation id="DataInputAssociation_3">
+                <bpmn:sourceRef>name</bpmn:sourceRef>
+                <bpmn:targetRef>DataInput_3</bpmn:targetRef>
+            </bpmn:dataInputAssociation>
+            <bpmn:dataOutputAssociation id="DataOutputAssociation_1">
+                <bpmn:sourceRef>DataOutput_1</bpmn:sourceRef>
+                <bpmn:targetRef>name</bpmn:targetRef>
+            </bpmn:dataOutputAssociation>
+        </bpmn:callActivity>
+        <bpmn:endEvent name="End" id="_1423791733170">
+            <bpmn:extensionElements>
+                <jbpmn:ShapeDesign>{"outer":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(226,232,236)"},"border":{"color":"RGB(108,142,183)","width":3.0}},"inner":{"background":{"startColor":"RGB(30,69,123)","endColor":"RGB(30,69,123)"},"border":{"color":"RGB(30,69,123)","width":1.0}}}</jbpmn:ShapeDesign>
+            </bpmn:extensionElements>
+            <bpmn:incoming>_1426816951479</bpmn:incoming>
+            <bpmn:terminateEventDefinition id="_142379173318139"/>
+        </bpmn:endEvent>
+        <bpmn:scriptTask isForCompensation="false" startQuantity="1" completionQuantity="1" name="Initial" id="_1423809442968">
+            <bpmn:extensionElements>
+                <jbpmn:ShapeDesign>{"outer":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(226,232,236)"},"border":{"color":"RGB(108,142,183)","width":2.5}},"inner":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(255,248,159)"},"border":{"color":"RGB(30,69,123)","width":1.0}}}</jbpmn:ShapeDesign>
+            </bpmn:extensionElements>
+            <bpmn:incoming>_1426746954725</bpmn:incoming>
+            <bpmn:outgoing>_1423809445989</bpmn:outgoing>
+            <bpmn:script>System.out.println("bpmn processInstanceId = "+kcontext.getProcessInstance().getId());
+kcontext.setVariable("pid", kcontext.getProcessInstance().getId());
+String glbtype = (String)kcontext.getKnowledgeRuntime().getGlobal("glbType");
+//kcontext.setVariable("type", glbtype);
+
+kcontext.getKnowledgeRuntime().setGlobal("glbProcessInstanceId", String.valueOf(kcontext.getProcessInstance().getId()));
+
+String glbProcessInstanceId = (String)kcontext.getKnowledgeRuntime().getGlobal("glbProcessInstanceId");
+
+System.out.println("in flow glbProcessInstanceId=&gt;"+glbProcessInstanceId);
+
+
+ 
+ tmp.Tmp.setProcessInstanceId(glbProcessInstanceId);
+
+
+System.out.println(" in flow get process tostring=&gt;"+tmp.Tmp.getProcessList().toString());
+
+  
+long num = Long.valueOf(glbProcessInstanceId);
+System.out.println("in flow num=&gt;"+num);
+
+
+
+ tmp.Tmp.getProcessList().add(num);
+    
+
+System.out.println(" in flow get processList=&gt;"+tmp.Tmp.getProcessList().toString());
+         
+
+
+String glbdeployID = (String)kcontext.getKnowledgeRuntime().getGlobal("glbdeployID");
+System.out.println("glbdeployID:"+glbdeployID);
+
+</bpmn:script>
+        </bpmn:scriptTask>
+        <bpmn:sequenceFlow sourceRef="_1423809442968" targetRef="_1423791722074" id="_1423809445989" drools:priority="1" xmlns:drools="http://www.jboss.org/drools"/>
+        <bpmn:sequenceFlow sourceRef="_1423791706961" targetRef="_1423809442968" id="_1426746954725" drools:priority="1" xmlns:drools="http://www.jboss.org/drools"/>
+        <bpmn:sequenceFlow sourceRef="_1423791722074" targetRef="_1423791733170" id="_1426816951479" drools:priority="1" xmlns:drools="http://www.jboss.org/drools"/>
+    </bpmn:process>
+    <bpmndi:BPMNDiagram id="_143132664103110">
+        <bpmndi:BPMNPlane id="_143132664103111">
+            <bpmndi:BPMNShape bpmnElement="_1423791706961" id="_1423791706961_gui">
+                <omgdc:Bounds x="82.0" y="78.0" width="42.0" height="42.0"/>
+                <bpmndi:BPMNLabel>
+                    <omgdc:Bounds x="88.0" y="128.0" width="27.0" height="21.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="_1423791722074" id="_1423791722074_gui">
+                <omgdc:Bounds x="349.0" y="67.0" width="80.0" height="64.0"/>
+                <bpmndi:BPMNLabel>
+                    <omgdc:Bounds x="361.0" y="140.0" width="69.0" height="19.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="_1423791733170" id="_1423791733170_gui">
+                <omgdc:Bounds x="508.0" y="78.0" width="42.0" height="42.0"/>
+                <bpmndi:BPMNLabel>
+                    <omgdc:Bounds x="516.0" y="128.0" width="24.0" height="21.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="_1423809442968" id="_1423809442968_gui">
+                <omgdc:Bounds x="218.0" y="67.0" width="80.0" height="64.0"/>
+                <bpmndi:BPMNLabel>
+                    <omgdc:Bounds x="242.0" y="140.0" width="29.0" height="19.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="_1423809445989" id="_1423809445989_gui">
+                <omgdi:waypoint x="296.0" y="98.0"/>
+                <omgdi:waypoint x="350.0" y="98.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="_1426746954725" id="_1426746954725_gui">
+                <omgdi:waypoint x="124.0" y="99.0"/>
+                <omgdi:waypoint x="219.0" y="99.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="_1426816951479" id="_1426816951479_gui">
+                <omgdi:waypoint x="427.0" y="98.0"/>
+                <omgdi:waypoint x="508.0" y="99.0"/>
+            </bpmndi:BPMNEdge>
+        </bpmndi:BPMNPlane>
+    </bpmndi:BPMNDiagram>
+</bpmn:definitions>
