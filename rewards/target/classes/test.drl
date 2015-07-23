@@ -1,0 +1,101 @@
+global String name;
+global String glbProcessInstanceId;
+global String glbstopProcess;
+global String glbType;
+global String glbdeployID;
+global String glbtimestamp;
+
+ 
+global org.kie.api.runtime.KieSession ksession;
+ 
+import java.math.BigInteger;
+import java.util.Map;
+import model.FlowCounter; 
+ 
+
+rule "traffic"
+ruleflow-group "automation"
+no-loop 
+when
+    $m: BigInteger()
+    eval($m.compareTo(new BigInteger("50"))==1)
+then
+    System.out.println("I'm activated");
+    String pp = (String)drools.getContext(org.kie.api.runtime.process.ProcessContext.class).getVariable("name");
+    System.out.println("in test rule pp=>"+pp);
+    System.out.println("I'm activated:"+pp);
+    Boolean aa = (Boolean)drools.getContext(org.kie.api.runtime.process.ProcessContext.class).getVariable("overflow");
+    System.out.println("in test rule pp=>"+aa);
+    drools.getContext(org.kie.api.runtime.process.ProcessContext.class).setVariable("overflow", true);
+    
+    //System.out.println("I'm activated"+$processInstance.getVariable("overflow"));
+    System.out.println("I'm activated"+$m);
+   
+   // processInstance.setVariable("overflow", BOOLEAN.TRUE);
+    
+end
+
+ 
+rule "status"
+ruleflow-group "automation"
+no-loop 
+when
+    $m: FlowCounter(status.equals(new String("down")),!tmp.Tmp.getDownPortSet().contains(nodeId+" "+port))
+then
+    System.out.println("I'm activated status");
+    Boolean aa = (Boolean)drools.getContext(org.kie.api.runtime.process.ProcessContext.class).getVariable("overflow");
+    System.out.println("in test rule pp=>"+aa);
+    drools.getContext(org.kie.api.runtime.process.ProcessContext.class).setVariable("overflow", true);
+  
+    
+    
+end
+
+
+
+rule "addPort"
+ruleflow-group "automation"
+no-loop 
+when
+    $m: FlowCounter(status.equals(new String("down")))
+then
+    System.out.println("I'm activated addPort: "+$m.getUp());
+   
+    tmp.Tmp.addDownPortSet($m.getNodeId()+" "+$m.getPort());
+    
+    System.out.println("in addPort rule tmp.Tmp.getDownPortSet()=>"+tmp.Tmp.getDownPortSet());
+    //tmp.Tmp.getDownPortSet().add(x);
+    //tmp.Tmp.getDownPortSet().remove(x);
+    
+    
+end
+
+rule "delPort"
+ruleflow-group "automation"
+no-loop 
+when
+    $m: FlowCounter(status.equals(new String("up")))
+then
+    System.out.println("I'm activated delPort: "+$m);
+    tmp.Tmp.delDownPortSet($m.getNodeId()+" "+$m.getPort());
+    System.out.println("in delPort rule tmp.Tmp.getDownPortSet()=>"+tmp.Tmp.getDownPortSet());
+    
+end
+
+//¦¹³W«h¤@©w­n©ñ¦b³Ì«á(¦]¬°¦b¤W­±¥þ³¡ªº³W«h§PÂ_§¹²¦«á­n§â ¬yµ{ID:µ²ªG ¶Ç¦^CCS)
+rule "default"
+ruleflow-group "automation"
+no-loop 
+when
+    eval(true)
+then
+    System.out.println("I'm activated default");
+    Long PID = (Long)drools.getContext(org.kie.api.runtime.process.ProcessContext.class).getVariable("pid");
+    System.out.println("PID:"+PID);
+    Boolean Result = (Boolean)drools.getContext(org.kie.api.runtime.process.ProcessContext.class).getVariable("overflow");
+    System.out.println("in default rule Result=>"+Result);
+    ws_client.Tester tt = new ws_client.Tester();
+    tt.sendAutomationResult(String.valueOf(PID), String.valueOf(Result));
+    //¦pªG¦³°e¥X¦¨¥\console·|¦L¥X 2755:true processInstanceId: result
+    
+end
